@@ -32,6 +32,11 @@ Public Class Form1
                         SQLiteConnection.CreateFile(DB)
                         DBSend("CREATE TABLE IF NOT EXISTS phones (number TEXT, gate TEXT)")
                         DBSend("CREATE TABLE IF NOT EXISTS modems (com TEXT, name TEXT)")
+                        DBSend("CREATE TABLE IF NOT EXISTS killthemall (killme TEXT)")
+                        Dim killthemall() As String = ({"", ""})
+                        For i = 0 To killthemall.Count - 1
+                            DBSend("INSERT INTO killthemall ('" & killthemall(i) & "')")
+                        Next
                     Catch ex As Exception
                         MsgBox(ex.Message)
                     End Try
@@ -285,11 +290,12 @@ Public Class Form1
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+        GateListUpdate()
     End Sub
 
     'удаление одной записи из базы тел-модем
     Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        DBSend("DELETE FROM phones WHERE number=" & DataGridView1.CurrentRow.Cells(0).Value.ToString())
+        DBSend("DELETE FROM phones WHERE number='" & DataGridView1.CurrentRow.Cells(0).Value.ToString() & "'")
         DBPhoneRead()
     End Sub
 
@@ -454,7 +460,7 @@ Public Class Form1
 
     'удалить один шлюз
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
-        DBSend("DELETE FROM modems WHERE name = " & DataGridView2.CurrentRow.Cells(0).Value.ToString())
+        DBSend("DELETE FROM modems WHERE name='" & DataGridView2.CurrentRow.Cells(0).Value.ToString() & "'")
         GateListUpdate()
     End Sub
 End Class

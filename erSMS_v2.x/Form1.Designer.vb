@@ -58,6 +58,7 @@ Partial Class Form1
         Me.gate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.ВыходToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -81,6 +82,7 @@ Partial Class Form1
         '
         'ФайлToolStripMenuItem
         '
+        Me.ФайлToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ВыходToolStripMenuItem})
         Me.ФайлToolStripMenuItem.Name = "ФайлToolStripMenuItem"
         Me.ФайлToolStripMenuItem.Size = New System.Drawing.Size(45, 20)
         Me.ФайлToolStripMenuItem.Text = "Файл"
@@ -370,11 +372,17 @@ Partial Class Form1
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage3.Size = New System.Drawing.Size(501, 520)
         Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Настройки плагина"
+        Me.TabPage3.Text = "Убивашка"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
         'Timer1
         '
+        '
+        'ВыходToolStripMenuItem
+        '
+        Me.ВыходToolStripMenuItem.Name = "ВыходToolStripMenuItem"
+        Me.ВыходToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ВыходToolStripMenuItem.Text = "Выход"
         '
         'Form1
         '
@@ -383,7 +391,9 @@ Partial Class Form1
         Me.ClientSize = New System.Drawing.Size(509, 572)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.MenuStrip1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MainMenuStrip = Me.MenuStrip1
+        Me.MaximizeBox = False
         Me.Name = "Form1"
         Me.Text = "erSMS v2.0"
         Me.MenuStrip1.ResumeLayout(False)
@@ -438,5 +448,6 @@ Partial Class Form1
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
+    Friend WithEvents ВыходToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

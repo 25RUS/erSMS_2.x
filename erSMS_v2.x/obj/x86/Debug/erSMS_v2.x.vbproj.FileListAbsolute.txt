@@ -42,3 +42,14 @@ C:\Users\TOLERAST\Desktop\erSMS_v2.x\erSMS_v2.x\obj\x86\Debug\GenerateResource.w
 C:\Users\TOLERAST\Desktop\erSMS_v2.x\erSMS_v2.x\bin\Debug\erSMS.exe
 C:\Users\TOLERAST\Desktop\erSMS_v2.x\erSMS_v2.x\bin\Debug\erSMS.pdb
 C:\Users\TOLERAST\Desktop\erSMS_v2.x\erSMS_v2.x\bin\Debug\erSMS.xml
+C:\Users\TOLERAST\Desktop\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\erSMS.exe
+C:\Users\TOLERAST\Desktop\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\erSMS.xml
+C:\Users\TOLERAST\Desktop\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\erSMS.pdb
+C:\Users\TOLERAST\Desktop\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\TOLERAST\Desktop\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\erSMS.Form1.resources
+C:\Users\TOLERAST\Desktop\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\erSMS.Resources.resources
+C:\Users\TOLERAST\Desktop\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\TOLERAST\Desktop\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\TOLERAST\Desktop\erSMS_2.x\erSMS_v2.x\bin\Debug\erSMS.exe
+C:\Users\TOLERAST\Desktop\erSMS_2.x\erSMS_v2.x\bin\Debug\erSMS.pdb
+C:\Users\TOLERAST\Desktop\erSMS_2.x\erSMS_v2.x\bin\Debug\erSMS.xml
