@@ -25,6 +25,7 @@ Partial Class Form1
         Me.components = New System.ComponentModel.Container()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ФайлToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ВыходToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.СправкаToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
@@ -58,7 +59,13 @@ Partial Class Form1
         Me.gate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.ВыходToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -69,6 +76,9 @@ Partial Class Form1
         Me.TabPage1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage3.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -86,6 +96,12 @@ Partial Class Form1
         Me.ФайлToolStripMenuItem.Name = "ФайлToolStripMenuItem"
         Me.ФайлToolStripMenuItem.Size = New System.Drawing.Size(45, 20)
         Me.ФайлToolStripMenuItem.Text = "Файл"
+        '
+        'ВыходToolStripMenuItem
+        '
+        Me.ВыходToolStripMenuItem.Name = "ВыходToolStripMenuItem"
+        Me.ВыходToolStripMenuItem.Size = New System.Drawing.Size(118, 22)
+        Me.ВыходToolStripMenuItem.Text = "Выход"
         '
         'СправкаToolStripMenuItem
         '
@@ -367,6 +383,8 @@ Partial Class Form1
         '
         'TabPage3
         '
+        Me.TabPage3.Controls.Add(Me.GroupBox6)
+        Me.TabPage3.Controls.Add(Me.GroupBox5)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
@@ -378,11 +396,72 @@ Partial Class Form1
         'Timer1
         '
         '
-        'ВыходToolStripMenuItem
+        'GroupBox5
         '
-        Me.ВыходToolStripMenuItem.Name = "ВыходToolStripMenuItem"
-        Me.ВыходToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ВыходToolStripMenuItem.Text = "Выход"
+        Me.GroupBox5.Controls.Add(Me.Button7)
+        Me.GroupBox5.Controls.Add(Me.TextBox3)
+        Me.GroupBox5.Location = New System.Drawing.Point(4, 7)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(489, 53)
+        Me.GroupBox5.TabIndex = 0
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Добавление процесса подлежащего завершению при старте плагина"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(6, 19)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(362, 20)
+        Me.TextBox3.TabIndex = 0
+        '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(374, 11)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(109, 34)
+        Me.Button7.TabIndex = 1
+        Me.Button7.Text = "Добавить"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.Button9)
+        Me.GroupBox6.Controls.Add(Me.Button8)
+        Me.GroupBox6.Controls.Add(Me.ListBox1)
+        Me.GroupBox6.Location = New System.Drawing.Point(7, 66)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(486, 448)
+        Me.GroupBox6.TabIndex = 1
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Список жертв"
+        '
+        'ListBox1
+        '
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.HorizontalScrollbar = True
+        Me.ListBox1.Location = New System.Drawing.Point(7, 20)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.ScrollAlwaysVisible = True
+        Me.ListBox1.Size = New System.Drawing.Size(473, 381)
+        Me.ListBox1.TabIndex = 0
+        '
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(7, 408)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(125, 34)
+        Me.Button8.TabIndex = 1
+        Me.Button8.Text = "Удалить выбранный"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
+        'Button9
+        '
+        Me.Button9.Location = New System.Drawing.Point(351, 408)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(129, 34)
+        Me.Button9.TabIndex = 2
+        Me.Button9.Text = "Удалить все"
+        Me.Button9.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -409,6 +488,10 @@ Partial Class Form1
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage3.ResumeLayout(False)
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -449,5 +532,12 @@ Partial Class Form1
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents ВыходToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
+    Friend WithEvents ListBox1 As System.Windows.Forms.ListBox
+    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
+    Friend WithEvents Button7 As System.Windows.Forms.Button
+    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents Button9 As System.Windows.Forms.Button
+    Friend WithEvents Button8 As System.Windows.Forms.Button
 
 End Class

@@ -8,6 +8,7 @@ Public Class Form1
     Dim separators As String = " "
     Dim commands As String = Command()
     Dim args() As String = commands.Split(separators.ToCharArray)
+
 #End Region
 
 #Region "DB presets"
@@ -19,35 +20,33 @@ Public Class Form1
 #End Region
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        Connect()
         If args(0) = "Setting" Then
             Me.Show()
             AddCOM()
-            Try
-                'считывание настроек
-                connectionString = String.Format(connectionString, DB)
-                If Not My.Computer.FileSystem.FileExists(DB) Then
-                    Try
-                        'создать БД с настройками по умолчанию
-                        SQLiteConnection.CreateFile(DB)
-                        DBSend("CREATE TABLE IF NOT EXISTS phones (number TEXT, gate TEXT)")
-                        DBSend("CREATE TABLE IF NOT EXISTS modems (com TEXT, name TEXT)")
-                        DBSend("CREATE TABLE IF NOT EXISTS killthemall (killme TEXT)")
-                        Dim killthemall() As String = ({"", ""})
-                        For i = 0 To killthemall.Count - 1
-                            DBSend("INSERT INTO killthemall ('" & killthemall(i) & "')")
-                        Next
-                    Catch ex As Exception
-                        MsgBox(ex.Message)
-                    End Try
-                ElseIf My.Computer.FileSystem.FileExists(DB) = True Then
-                    'просто считать настройки с существующей БД
-                    DBPhoneRead()
-                    ModemRead()
-                End If
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
+            'считывание настроек
+            connectionString = String.Format(connectionString, DB)
+            If Not My.Computer.FileSystem.FileExists(DB) Then
+                Try
+                    'создать БД с настройками по умолчанию
+                    SQLiteConnection.CreateFile(DB)
+                    DBSend("CREATE TABLE IF NOT EXISTS phones (number TEXT, gate TEXT)")
+                    DBSend("CREATE TABLE IF NOT EXISTS modems (com TEXT, name TEXT)")
+                    DBSend("CREATE TABLE IF NOT EXISTS killthemall (killme TEXT)")
+                    Dim killthemall() As String = ({"Megafon_app", "beeline_app"})
+                    For i = 0 To killthemall.Count - 1
+                        DBSend("INSERT INTO killthemall (killme) VALUES ('" & killthemall(i) & "')")
+                    Next
+                Catch ex As Exception
+                    MsgBox("Creating default DB error: " & ex.Message)
+                End Try
+            ElseIf My.Computer.FileSystem.FileExists(DB) = True Then
+                'просто считать настройки с существующей БД
+                DBPhoneRead()
+                ModemRead()
+            End If
+            KillListboxUpdate()
+            BornToKill()
             Timer1.Start()
         ElseIf args(0) = "Push" Then
             Me.Hide()
@@ -67,7 +66,6 @@ Public Class Form1
             For i = 0 To args.Count - 1
                 message = message + args(i) & " "
             Next
-            Connect()
             Try
                 Dim number As DataTable = New DataTable()
                 Dim adapter0 As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM phones", m_dbConn)
@@ -109,7 +107,7 @@ Public Class Form1
             m_sqlCmd.CommandText = sqlQuery
             m_sqlCmd.ExecuteNonQuery()
         Catch ex As Exception
-            MessageBox.Show("Error: " + ex.Message)
+            MessageBox.Show("BDSend Error: " + ex.Message)
         End Try
     End Sub
 
@@ -127,7 +125,7 @@ Public Class Form1
                 Next
             End If
         Catch ex As Exception
-            MessageBox.Show("Error: " + ex.Message)
+            MessageBox.Show("DBPhoneRead Error: " + ex.Message)
         End Try
     End Sub
 
@@ -143,7 +141,7 @@ Public Class Form1
                 ComboBox3.Items.Add(modem.Rows(i).Item(1))
             Next
         Catch ex As Exception
-            MsgBox(ex.Message)
+            MsgBox("ModemRead error: " & ex.Message)
         End Try
     End Sub
 
@@ -204,11 +202,11 @@ Public Class Form1
             'End If
             SP.Close()
             'логгирование
-            Dim D As Date = Now
-            My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", D & " Начата отправка СМС c текстом:" & Message & " на номер: " & tel & vbNewLine & sp_result & vbNewLine, True)
+            'Dim D As Date = Now
+            'My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", D & " Начата отправка СМС c текстом:" & Message & " на номер: " & tel & vbNewLine & sp_result & vbNewLine, True)
         Catch ex As Exception
-            Dim D As Date = Now
-            My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", D & " СМС c текстом:" & Message & " не была послана на: " & tel & vbNewLine & ex.Message & vbNewLine, True)
+            'Dim D As Date = Now
+            'My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", D & " СМС c текстом:" & Message & " не была послана на: " & tel & vbNewLine & ex.Message & vbNewLine, True)
         End Try
     End Sub
 
@@ -226,7 +224,7 @@ Public Class Form1
             SP.RtsEnable = True
             SP.Open()
         Catch ex As Exception
-            'MsgBox(ex.Message)
+            MsgBox("Openport error: " & ex.Message)
         End Try
     End Sub
 
@@ -255,6 +253,35 @@ Public Class Form1
             ' My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", D & ": PortsAdd_ERROR: " & ex.Message & vbNewLine, True)
         End Try
         'ComboBox1.Items.Add("COM2") 'debug
+    End Sub
+
+    'прикончить всех
+    Private Sub BornToKill()
+        Try
+            Dim kill0 As DataTable = New DataTable
+            Dim adapter As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM killthemall", m_dbConn)
+            adapter.Fill(kill0)
+            For m = 0 To kill0.Rows.Count - 1
+                Process.GetProcessesByName(kill0.Rows(m).Item(0).ToString())(0).Kill()
+            Next
+        Catch ex As Exception
+            MsgBox("BornToKill error: " & ex.Message)
+        End Try
+    End Sub
+
+    'обновление списка смертников
+    Private Sub KillListboxUpdate()
+        Try
+            ListBox1.Items.Clear()
+            Dim kill As DataTable = New DataTable()
+            Dim adapter As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM killthemall", m_dbConn)
+            adapter.Fill(kill)
+            For k = 0 To kill.Rows.Count - 1
+                ListBox1.Items.Add(kill.Rows(k).Item(0).ToString)
+            Next
+        Catch ex As Exception
+            MsgBox("KillListboxUpdate error: " & ex.Message)
+        End Try
     End Sub
     '*********************************************************GUI************************************************
 
@@ -339,8 +366,10 @@ Public Class Form1
                 DataGridView2.Rows(i).Cells(4).Value = New Bitmap(IO.Directory.GetCurrentDirectory & "\Plugins\erSMS_Resources\Signal\" & sigarr(1))
             Next
         Catch ex As Exception
+            MsgBox("GateListUpdate error: " & ex.Message)
         End Try
     End Sub
+
     'получить имя сети
     Private Function GetOperator()
         Dim oper As String
@@ -462,5 +491,24 @@ Public Class Form1
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
         DBSend("DELETE FROM modems WHERE name='" & DataGridView2.CurrentRow.Cells(0).Value.ToString() & "'")
         GateListUpdate()
+    End Sub
+
+    'убивашка добавляет говнопрогу опсоса в ЧС
+    Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
+        DBSend("INSERT INTO killthemall (killme) VALUES ('" & TextBox3.Text & "')")
+        TextBox3.Clear()
+        KillListboxUpdate()
+    End Sub
+
+    'очистить список смертников
+    Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
+        DBSend("DELETE FROM killthemall")
+        KillListboxUpdate()
+    End Sub
+
+    'удалить одного приговорённого
+    Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
+        DBSend("DELETE FROM killthemall WHERE killme = '" & ListBox1.SelectedItem & "'")
+        KillListboxUpdate()
     End Sub
 End Class

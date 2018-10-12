@@ -53,3 +53,14 @@ C:\Users\TOLERAST\Desktop\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\GenerateResource.wr
 C:\Users\TOLERAST\Desktop\erSMS_2.x\erSMS_v2.x\bin\Debug\erSMS.exe
 C:\Users\TOLERAST\Desktop\erSMS_2.x\erSMS_v2.x\bin\Debug\erSMS.pdb
 C:\Users\TOLERAST\Desktop\erSMS_2.x\erSMS_v2.x\bin\Debug\erSMS.xml
+C:\Documents and Settings\Admin\Мои документы\Visual Studio 2010\Projects\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\erSMS.exe
+C:\Documents and Settings\Admin\Мои документы\Visual Studio 2010\Projects\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\erSMS.xml
+C:\Documents and Settings\Admin\Мои документы\Visual Studio 2010\Projects\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\erSMS.pdb
+C:\Documents and Settings\Admin\Мои документы\Visual Studio 2010\Projects\erSMS_2.x\erSMS_v2.x\bin\Debug\erSMS.exe
+C:\Documents and Settings\Admin\Мои документы\Visual Studio 2010\Projects\erSMS_2.x\erSMS_v2.x\bin\Debug\erSMS.pdb
+C:\Documents and Settings\Admin\Мои документы\Visual Studio 2010\Projects\erSMS_2.x\erSMS_v2.x\bin\Debug\erSMS.xml
+C:\Documents and Settings\Admin\Мои документы\Visual Studio 2010\Projects\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Admin\Мои документы\Visual Studio 2010\Projects\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\erSMS.Form1.resources
+C:\Documents and Settings\Admin\Мои документы\Visual Studio 2010\Projects\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\erSMS.Resources.resources
+C:\Documents and Settings\Admin\Мои документы\Visual Studio 2010\Projects\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Admin\Мои документы\Visual Studio 2010\Projects\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\GenerateResource.write.1.tlog
