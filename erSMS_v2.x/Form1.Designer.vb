@@ -23,6 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ФайлToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ВыходToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -58,14 +59,22 @@ Partial Class Form1
         Me.Номера = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.gate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Button7 = New System.Windows.Forms.Button()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
-        Me.Button8 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.ListBox2 = New System.Windows.Forms.ListBox()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.ПоказатьЛогToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -77,8 +86,11 @@ Partial Class Form1
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage3.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
+        Me.GroupBox8.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -92,7 +104,7 @@ Partial Class Form1
         '
         'ФайлToolStripMenuItem
         '
-        Me.ФайлToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ВыходToolStripMenuItem})
+        Me.ФайлToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПоказатьЛогToolStripMenuItem, Me.ВыходToolStripMenuItem})
         Me.ФайлToolStripMenuItem.Name = "ФайлToolStripMenuItem"
         Me.ФайлToolStripMenuItem.Size = New System.Drawing.Size(45, 20)
         Me.ФайлToolStripMenuItem.Text = "Файл"
@@ -100,7 +112,7 @@ Partial Class Form1
         'ВыходToolStripMenuItem
         '
         Me.ВыходToolStripMenuItem.Name = "ВыходToolStripMenuItem"
-        Me.ВыходToolStripMenuItem.Size = New System.Drawing.Size(118, 22)
+        Me.ВыходToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ВыходToolStripMenuItem.Text = "Выход"
         '
         'СправкаToolStripMenuItem
@@ -114,6 +126,7 @@ Partial Class Form1
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Location = New System.Drawing.Point(0, 27)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
@@ -185,6 +198,8 @@ Partial Class Form1
         Me.DataGridView2.GridColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.DataGridView2.Location = New System.Drawing.Point(6, 20)
         Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.ReadOnly = True
+        Me.DataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView2.Size = New System.Drawing.Size(475, 315)
         Me.DataGridView2.TabIndex = 0
         '
@@ -192,26 +207,31 @@ Partial Class Form1
         '
         Me.Column1.HeaderText = "Шлюз"
         Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
         '
         'Column2
         '
         Me.Column2.HeaderText = "Порт"
         Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
         '
         'Column3
         '
         Me.Column3.HeaderText = "Оператор"
         Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
         '
         'Column4
         '
         Me.Column4.HeaderText = "Сигнал dBm"
         Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
         '
         'Column5
         '
         Me.Column5.HeaderText = "Уровень"
         Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
         Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
@@ -368,6 +388,7 @@ Partial Class Form1
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Номера, Me.gate})
         Me.DataGridView1.Location = New System.Drawing.Point(9, 73)
         Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView1.Size = New System.Drawing.Size(321, 428)
         Me.DataGridView1.TabIndex = 0
         '
@@ -375,11 +396,13 @@ Partial Class Form1
         '
         Me.Номера.HeaderText = "Номера"
         Me.Номера.Name = "Номера"
+        Me.Номера.ReadOnly = True
         '
         'gate
         '
         Me.gate.HeaderText = "Связанные шлюзы"
         Me.gate.Name = "gate"
+        Me.gate.ReadOnly = True
         '
         'TabPage3
         '
@@ -393,36 +416,6 @@ Partial Class Form1
         Me.TabPage3.Text = "Убивашка"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
-        'Timer1
-        '
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.Button7)
-        Me.GroupBox5.Controls.Add(Me.TextBox3)
-        Me.GroupBox5.Location = New System.Drawing.Point(4, 7)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(489, 53)
-        Me.GroupBox5.TabIndex = 0
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Добавление процесса подлежащего завершению при старте плагина"
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(6, 19)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(362, 20)
-        Me.TextBox3.TabIndex = 0
-        '
-        'Button7
-        '
-        Me.Button7.Location = New System.Drawing.Point(374, 11)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(109, 34)
-        Me.Button7.TabIndex = 1
-        Me.Button7.Text = "Добавить"
-        Me.Button7.UseVisualStyleBackColor = True
-        '
         'GroupBox6
         '
         Me.GroupBox6.Controls.Add(Me.Button9)
@@ -435,15 +428,14 @@ Partial Class Form1
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Список жертв"
         '
-        'ListBox1
+        'Button9
         '
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.HorizontalScrollbar = True
-        Me.ListBox1.Location = New System.Drawing.Point(7, 20)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.ScrollAlwaysVisible = True
-        Me.ListBox1.Size = New System.Drawing.Size(473, 381)
-        Me.ListBox1.TabIndex = 0
+        Me.Button9.Location = New System.Drawing.Point(351, 408)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(129, 34)
+        Me.Button9.TabIndex = 2
+        Me.Button9.Text = "Удалить все"
+        Me.Button9.UseVisualStyleBackColor = True
         '
         'Button8
         '
@@ -454,14 +446,117 @@ Partial Class Form1
         Me.Button8.Text = "Удалить выбранный"
         Me.Button8.UseVisualStyleBackColor = True
         '
-        'Button9
+        'ListBox1
         '
-        Me.Button9.Location = New System.Drawing.Point(351, 408)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(129, 34)
-        Me.Button9.TabIndex = 2
-        Me.Button9.Text = "Удалить все"
-        Me.Button9.UseVisualStyleBackColor = True
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.HorizontalScrollbar = True
+        Me.ListBox1.Location = New System.Drawing.Point(7, 20)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.ScrollAlwaysVisible = True
+        Me.ListBox1.Size = New System.Drawing.Size(473, 381)
+        Me.ListBox1.TabIndex = 0
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.Button7)
+        Me.GroupBox5.Controls.Add(Me.TextBox3)
+        Me.GroupBox5.Location = New System.Drawing.Point(4, 7)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(489, 53)
+        Me.GroupBox5.TabIndex = 0
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Добавление процесса подлежащего завершению при старте плагина"
+        '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(374, 11)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(109, 34)
+        Me.Button7.TabIndex = 1
+        Me.Button7.Text = "Добавить"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(6, 19)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(362, 20)
+        Me.TextBox3.TabIndex = 0
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.GroupBox8)
+        Me.TabPage4.Controls.Add(Me.GroupBox7)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage4.Size = New System.Drawing.Size(501, 520)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "Терминал"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'GroupBox8
+        '
+        Me.GroupBox8.Controls.Add(Me.ComboBox2)
+        Me.GroupBox8.Location = New System.Drawing.Point(6, 7)
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.Size = New System.Drawing.Size(492, 56)
+        Me.GroupBox8.TabIndex = 1
+        Me.GroupBox8.TabStop = False
+        Me.GroupBox8.Text = "Выберете модем/GSM устройство:"
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Location = New System.Drawing.Point(6, 19)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(480, 21)
+        Me.ComboBox2.TabIndex = 0
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.ListBox2)
+        Me.GroupBox7.Controls.Add(Me.Button10)
+        Me.GroupBox7.Controls.Add(Me.TextBox4)
+        Me.GroupBox7.Location = New System.Drawing.Point(6, 69)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(492, 448)
+        Me.GroupBox7.TabIndex = 0
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Введите АТ-команду:"
+        '
+        'ListBox2
+        '
+        Me.ListBox2.FormattingEnabled = True
+        Me.ListBox2.Location = New System.Drawing.Point(7, 64)
+        Me.ListBox2.Name = "ListBox2"
+        Me.ListBox2.Size = New System.Drawing.Size(479, 381)
+        Me.ListBox2.TabIndex = 2
+        '
+        'Button10
+        '
+        Me.Button10.Location = New System.Drawing.Point(384, 19)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(103, 31)
+        Me.Button10.TabIndex = 1
+        Me.Button10.Text = "Ввод"
+        Me.Button10.UseVisualStyleBackColor = True
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(6, 24)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(371, 20)
+        Me.TextBox4.TabIndex = 0
+        '
+        'Timer1
+        '
+        '
+        'ПоказатьЛогToolStripMenuItem
+        '
+        Me.ПоказатьЛогToolStripMenuItem.Name = "ПоказатьЛогToolStripMenuItem"
+        Me.ПоказатьЛогToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ПоказатьЛогToolStripMenuItem.Text = "Показать лог"
         '
         'Form1
         '
@@ -471,6 +566,7 @@ Partial Class Form1
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximizeBox = False
         Me.Name = "Form1"
@@ -489,9 +585,13 @@ Partial Class Form1
         Me.GroupBox1.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage3.ResumeLayout(False)
+        Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
+        Me.TabPage4.ResumeLayout(False)
+        Me.GroupBox8.ResumeLayout(False)
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -515,19 +615,12 @@ Partial Class Form1
     Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
-    Friend WithEvents Номера As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents gate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents ComboBox3 As System.Windows.Forms.ComboBox
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents DataGridView2 As System.Windows.Forms.DataGridView
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewImageColumn
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
@@ -539,5 +632,20 @@ Partial Class Form1
     Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
     Friend WithEvents Button9 As System.Windows.Forms.Button
     Friend WithEvents Button8 As System.Windows.Forms.Button
+    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents Номера As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents gate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
+    Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
+    Friend WithEvents ComboBox2 As System.Windows.Forms.ComboBox
+    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
+    Friend WithEvents ListBox2 As System.Windows.Forms.ListBox
+    Friend WithEvents Button10 As System.Windows.Forms.Button
+    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
+    Friend WithEvents ПоказатьЛогToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

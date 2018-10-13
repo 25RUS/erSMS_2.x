@@ -8,7 +8,6 @@ Public Class Form1
     Dim separators As String = " "
     Dim commands As String = Command()
     Dim args() As String = commands.Split(separators.ToCharArray)
-
 #End Region
 
 #Region "DB presets"
@@ -33,9 +32,9 @@ Public Class Form1
                     DBSend("CREATE TABLE IF NOT EXISTS phones (number TEXT, gate TEXT)")
                     DBSend("CREATE TABLE IF NOT EXISTS modems (com TEXT, name TEXT)")
                     DBSend("CREATE TABLE IF NOT EXISTS killthemall (killme TEXT)")
-                    Dim killthemall() As String = ({"Megafon_app", "beeline_app"})
-                    For i = 0 To killthemall.Count - 1
-                        DBSend("INSERT INTO killthemall (killme) VALUES ('" & killthemall(i) & "')")
+                    Dim killme() As String = ({"HUAWEI Modem 3.5", "HUAWEI Modem 3.0"})
+                    For i = 0 To killme.Count - 1
+                        DBSend("INSERT INTO killthemall (killme) VALUES ('" & killme(i) & "')")
                     Next
                 Catch ex As Exception
                     MsgBox("Creating default DB error: " & ex.Message)
@@ -48,16 +47,6 @@ Public Class Form1
             KillListboxUpdate()
             BornToKill()
             Timer1.Start()
-        ElseIf args(0) = "Push" Then
-            Me.Hide()
-            'Push +79940001234 text
-            'sms(args(2...x))
-            Me.Close()
-        ElseIf args(0) = "PushToGate" Then
-            Me.Hide()
-            'Push +79940001234 GATE0 text
-            'sms(args(2...x))
-            Me.Close()
         ElseIf args.Count >= 1 And args(0) <> "Setting" Then
             Me.Hide()
             'text
@@ -77,7 +66,7 @@ Public Class Form1
                     SMS(number.Rows(i).Item(0), gate.Rows(0).Item(0), message)
                 Next
             Catch ex As Exception
-
+                LogMrg("Sending error: " & ex.Message)
             End Try
             Me.Close()
         ElseIf args.Count = 0 Then
@@ -196,17 +185,11 @@ Public Class Form1
             SP.WriteLine(MSG & Chr(26) & vbCrLf)
             Threading.Thread.Sleep(1000)
             Dim sp_result As String = SP.ReadExisting()
-            ' If Message = "тестовое сообщение" Then
-            'TextBox4.Text = sp_result
-            'TextBox4.Text = TextBox4.Text.Replace(New Char() {vbLf, vbCr}, "").TrimEnd(New Char() {vbLf, vbCr})
-            'End If
             SP.Close()
             'логгирование
-            'Dim D As Date = Now
-            'My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", D & " Начата отправка СМС c текстом:" & Message & " на номер: " & tel & vbNewLine & sp_result & vbNewLine, True)
+            LogMrg(sp_result)
         Catch ex As Exception
-            'Dim D As Date = Now
-            'My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", D & " СМС c текстом:" & Message & " не была послана на: " & tel & vbNewLine & ex.Message & vbNewLine, True)
+            LogMrg("SMS error: " & ex.Message)
         End Try
     End Sub
 
@@ -224,16 +207,21 @@ Public Class Form1
             SP.RtsEnable = True
             SP.Open()
         Catch ex As Exception
-            MsgBox("Openport error: " & ex.Message)
+            MsgBox("OpenPort error: " & ex.Message)
         End Try
     End Sub
 
-    Public Sub LogMrg()
+    Private Sub LogMrg(ByVal log As String)
         'удаление пустых строк из лога
+        'Try
+        '    Dim textS As String = IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt")
+        '    Dim textE = textS.Replace(New Char() {vbLf, vbCr}, "").TrimEnd(New Char() {vbLf, vbCr})
+        '    My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", textE & vbNewLine, False)
+        'Catch ex As Exception
+        'End Try
         Try
-            Dim textS As String = IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt")
-            Dim textE = textS.Replace(New Char() {vbLf, vbCr}, "").TrimEnd(New Char() {vbLf, vbCr})
-            My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", textE & vbNewLine, False)
+            Dim D As Date = Now
+            My.Computer.FileSystem.WriteAllText(IO.Directory.GetCurrentDirectory & "\Plugins\erSMS_Resources\ersms.log", D & ": " & log & vbNewLine, True)
         Catch ex As Exception
         End Try
     End Sub
@@ -259,13 +247,14 @@ Public Class Form1
     Private Sub BornToKill()
         Try
             Dim kill0 As DataTable = New DataTable
-            Dim adapter As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM killthemall", m_dbConn)
-            adapter.Fill(kill0)
+            Dim adapter0 As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM killthemall", m_dbConn)
+            adapter0.Fill(kill0)
             For m = 0 To kill0.Rows.Count - 1
+                'MsgBox(m & vbNewLine & kill0.Rows(m).Item(0).ToString())
                 Process.GetProcessesByName(kill0.Rows(m).Item(0).ToString())(0).Kill()
             Next
         Catch ex As Exception
-            MsgBox("BornToKill error: " & ex.Message)
+            'MsgBox("BornToKill error: " & ex.Message)
         End Try
     End Sub
 
@@ -364,6 +353,7 @@ Public Class Form1
                 Dim sigarr() As String = SignalInfo.Split(" ")
                 DataGridView2.Rows.Add(name, com, OpSos, sigarr(0))
                 DataGridView2.Rows(i).Cells(4).Value = New Bitmap(IO.Directory.GetCurrentDirectory & "\Plugins\erSMS_Resources\Signal\" & sigarr(1))
+                ComboBox2.Items.Add(name)
             Next
         Catch ex As Exception
             MsgBox("GateListUpdate error: " & ex.Message)
@@ -423,7 +413,7 @@ Public Class Form1
             'My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", D & ": Signal_ERROR: " & ex.Message & vbNewLine, True)
         End Try
 
-    
+
         Try
             ModemAnswer = ModemAnswer.Replace(New Char() {vbLf, vbCr}, "").TrimEnd(New Char() {vbLf, vbCr})
             ModemArr = ModemAnswer.Split(vbLf & vbCr & " ".ToCharArray)
@@ -473,7 +463,7 @@ Public Class Form1
 
     'удалить все шлюзы
     Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
-   
+
         Dim response As MsgBoxResult
         Dim style As MsgBoxStyle = MsgBoxStyle.DefaultButton2 Or _
            MsgBoxStyle.Critical Or MsgBoxStyle.YesNo
@@ -510,5 +500,32 @@ Public Class Form1
     Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
         DBSend("DELETE FROM killthemall WHERE killme = '" & ListBox1.SelectedItem & "'")
         KillListboxUpdate()
+    End Sub
+
+    'отправка АТ-команды
+    Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
+        Try
+            Dim send As DataTable = New DataTable()
+            Dim adapter As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM modems WHERE name = '" & ComboBox2.SelectedItem & "'", m_dbConn)
+            adapter.Fill(send)
+            OpenPort(send.Rows(0).Item(0))
+            SP.WriteLine(TextBox4.Text & vbCrLf)
+            Threading.Thread.Sleep(500)
+            Dim answer As String = SP.ReadExisting()
+            SP.Close()
+            ListBox2.Items.Add(send.Rows(0).Item(0) & "> " & TextBox4.Text)
+            ListBox2.Items.AddRange(answer.Split(vbNewLine))
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    'показать лог
+    Private Sub ПоказатьЛогToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПоказатьЛогToolStripMenuItem.Click
+        Try
+            Process.Start(IO.Directory.GetCurrentDirectory & "\Plugins\erSMS_Resources\ersms.log")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 End Class
