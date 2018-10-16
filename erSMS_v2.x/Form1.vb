@@ -19,12 +19,12 @@ Public Class Form1
 #End Region
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        connectionString = String.Format(connectionString, DB)
         Connect()
         If args(0) = "Setting" Then
             Me.Show()
             AddCOM()
             'считывание настроек
-            connectionString = String.Format(connectionString, DB)
             If Not My.Computer.FileSystem.FileExists(DB) Then
                 Try
                     'создать БД с настройками по умолчанию
@@ -37,7 +37,7 @@ Public Class Form1
                         DBSend("INSERT INTO killthemall (killme) VALUES ('" & killme(i) & "')")
                     Next
                 Catch ex As Exception
-                    MsgBox("Creating default DB error: " & ex.Message)
+                    LogMrg("Creating default DB error: " & ex.Message)
                 End Try
             ElseIf My.Computer.FileSystem.FileExists(DB) = True Then
                 'просто считать настройки с существующей БД
@@ -49,8 +49,7 @@ Public Class Form1
             Timer1.Start()
         ElseIf args.Count >= 1 And args(0) <> "Setting" Then
             Me.Hide()
-            'text
-            ' sms(0...x)
+            BornToKill()
             Dim message As String = Nothing
             For i = 0 To args.Count - 1
                 message = message + args(i) & " "
@@ -84,7 +83,7 @@ Public Class Form1
             m_dbConn = New SQLiteConnection(connectionString)
             m_dbConn.Open()
         Catch ex As Exception
-            MessageBox.Show("Error: " + ex.Message)
+            LogMrg("Error: " + ex.Message)
         End Try
     End Sub
 
@@ -96,7 +95,7 @@ Public Class Form1
             m_sqlCmd.CommandText = sqlQuery
             m_sqlCmd.ExecuteNonQuery()
         Catch ex As Exception
-            MessageBox.Show("BDSend Error: " + ex.Message)
+            LogMrg("BDSend Error: " + ex.Message)
         End Try
     End Sub
 
@@ -114,7 +113,7 @@ Public Class Form1
                 Next
             End If
         Catch ex As Exception
-            MessageBox.Show("DBPhoneRead Error: " + ex.Message)
+            LogMrg("DBPhoneRead Error: " + ex.Message)
         End Try
     End Sub
 
@@ -130,7 +129,7 @@ Public Class Form1
                 ComboBox3.Items.Add(modem.Rows(i).Item(1))
             Next
         Catch ex As Exception
-            MsgBox("ModemRead error: " & ex.Message)
+            LogMrg("ModemRead error: " & ex.Message)
         End Try
     End Sub
 
@@ -207,7 +206,7 @@ Public Class Form1
             SP.RtsEnable = True
             SP.Open()
         Catch ex As Exception
-            MsgBox("OpenPort error: " & ex.Message)
+            'MsgBox("OpenPort error: " & ex.Message)
         End Try
     End Sub
 
@@ -221,7 +220,7 @@ Public Class Form1
         'End Try
         Try
             Dim D As Date = Now
-            My.Computer.FileSystem.WriteAllText(IO.Directory.GetCurrentDirectory & "\Plugins\erSMS_Resources\ersms.log", D & ": " & log & vbNewLine, True)
+            My.Computer.FileSystem.WriteAllText(IO.Directory.GetCurrentDirectory & "\Plugins\erSMS_Resources\ersms.log", D & ": " & log.Replace(New Char() {vbLf, vbCr}, "").TrimEnd(New Char() {vbLf, vbCr}) & vbNewLine, True)
         Catch ex As Exception
         End Try
     End Sub
@@ -237,8 +236,6 @@ Public Class Form1
                 ComboBox1.Items.Add(port)
             Next port
         Catch ex As Exception
-            ' Dim D As Date = Now
-            ' My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", D & ": PortsAdd_ERROR: " & ex.Message & vbNewLine, True)
         End Try
         'ComboBox1.Items.Add("COM2") 'debug
     End Sub
@@ -254,7 +251,7 @@ Public Class Form1
                 Process.GetProcessesByName(kill0.Rows(m).Item(0).ToString())(0).Kill()
             Next
         Catch ex As Exception
-            'MsgBox("BornToKill error: " & ex.Message)
+            LogMrg("BornToKill error: " & ex.Message)
         End Try
     End Sub
 
@@ -269,7 +266,7 @@ Public Class Form1
                 ListBox1.Items.Add(kill.Rows(k).Item(0).ToString)
             Next
         Catch ex As Exception
-            MsgBox("KillListboxUpdate error: " & ex.Message)
+            LogMrg("KillListboxUpdate error: " & ex.Message)
         End Try
     End Sub
     '*********************************************************GUI************************************************
@@ -282,13 +279,15 @@ Public Class Form1
 
     'добавление записи в БД телефонов
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        If ComboBox3.SelectedItem = "" Then
-            MsgBox("Выберите шлюз для отправки на номер " & TextBox1.Text)
-        ElseIf TextBox1.Text = "" Then
-            MsgBox("Введите номер телефона!")
+        Dim gate, num As String
+        gate = ComboBox3.SelectedItem
+        num = TextBox1.Text
+        If num = "" And gate = "" Then
+            MsgBox("Заполните поля!")
+            Exit Sub
         Else
             DataGridView1.Rows.Clear()
-            DBSend("INSERT INTO phones (number, gate) VALUES ('" & TextBox1.Text & "', '" & ComboBox3.SelectedItem & "')")
+            DBSend("INSERT INTO phones (number, gate) VALUES ('" & num & "', '" & gate & "')")
             DBPhoneRead()
         End If
     End Sub
@@ -296,15 +295,19 @@ Public Class Form1
     'добавление модемов
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
         Try
-            If TextBox2.Text <> "" And ComboBox1.SelectedItem <> "" Then
-                DBSend("INSERT INTO modems (com,  name) VALUES ('" & ComboBox1.SelectedItem & "', '" & TextBox2.Text & "')")
+            Dim com, name As String
+            com = ComboBox1.SelectedItem
+            name = TextBox2.Text
+            If name <> "" And com <> "" Then
+                DBSend("INSERT INTO modems (com,  name) VALUES ('" & com & "', '" & name & "')")
                 ModemRead()
                 TextBox2.Text = ""
             Else
                 MsgBox("Не должно быть пустых полей!")
+                Exit Sub
             End If
         Catch ex As Exception
-            MsgBox(ex.Message)
+            LogMrg("GSM_add error: " & ex.Message)
         End Try
         GateListUpdate()
     End Sub
@@ -341,6 +344,7 @@ Public Class Form1
             Dim adapter As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM modems", m_dbConn)
             adapter.Fill(modem)
             DataGridView2.Rows.Clear()
+            ComboBox2.Items.Clear()
             For i = 0 To modem.Rows.Count - 1
                 OpenPort(modem.Rows(i).Item(0))
                 OpSos = GetOperator()
@@ -356,7 +360,7 @@ Public Class Form1
                 ComboBox2.Items.Add(name)
             Next
         Catch ex As Exception
-            MsgBox("GateListUpdate error: " & ex.Message)
+            LogMrg("GateListUpdate error: " & ex.Message)
         End Try
     End Sub
 
@@ -409,8 +413,7 @@ Public Class Form1
             Threading.Thread.Sleep(500)
             ModemAnswer = SP.ReadExisting()
         Catch ex As Exception
-            'Dim D As Date = Now
-            'My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", D & ": Signal_ERROR: " & ex.Message & vbNewLine, True)
+            LogMrg("SignalShow_COM_request error: " & ex.Message)
         End Try
 
 
@@ -485,9 +488,14 @@ Public Class Form1
 
     'убивашка добавляет говнопрогу опсоса в ЧС
     Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
-        DBSend("INSERT INTO killthemall (killme) VALUES ('" & TextBox3.Text & "')")
-        TextBox3.Clear()
-        KillListboxUpdate()
+        If TextBox3.Text = "" Then
+            MsgBox("Введите название процесса подлежащего завершению!")
+            Exit Sub
+        Else
+            DBSend("INSERT INTO killthemall (killme) VALUES ('" & TextBox3.Text & "')")
+            TextBox3.Clear()
+            KillListboxUpdate()
+        End If
     End Sub
 
     'очистить список смертников
@@ -516,7 +524,7 @@ Public Class Form1
             ListBox2.Items.Add(send.Rows(0).Item(0) & "> " & TextBox4.Text)
             ListBox2.Items.AddRange(answer.Split(vbNewLine))
         Catch ex As Exception
-            MsgBox(ex.Message)
+            LogMrg("terminal_error: " & ex.Message)
         End Try
     End Sub
 
@@ -527,5 +535,10 @@ Public Class Form1
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+    End Sub
+
+    'выход
+    Private Sub ВыходToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ВыходToolStripMenuItem.Click
+        End
     End Sub
 End Class

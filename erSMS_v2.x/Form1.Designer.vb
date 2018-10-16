@@ -26,6 +26,7 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ФайлToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПоказатьЛогToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ВыходToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.СправкаToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
@@ -74,7 +75,6 @@ Partial Class Form1
         Me.Button10 = New System.Windows.Forms.Button()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.ПоказатьЛогToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -109,10 +109,16 @@ Partial Class Form1
         Me.ФайлToolStripMenuItem.Size = New System.Drawing.Size(45, 20)
         Me.ФайлToolStripMenuItem.Text = "Файл"
         '
+        'ПоказатьЛогToolStripMenuItem
+        '
+        Me.ПоказатьЛогToolStripMenuItem.Name = "ПоказатьЛогToolStripMenuItem"
+        Me.ПоказатьЛогToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.ПоказатьЛогToolStripMenuItem.Text = "Показать лог"
+        '
         'ВыходToolStripMenuItem
         '
         Me.ВыходToolStripMenuItem.Name = "ВыходToolStripMenuItem"
-        Me.ВыходToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ВыходToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
         Me.ВыходToolStripMenuItem.Text = "Выход"
         '
         'СправкаToolStripMenuItem
@@ -551,12 +557,6 @@ Partial Class Form1
         '
         'Timer1
         '
-        '
-        'ПоказатьЛогToolStripMenuItem
-        '
-        Me.ПоказатьЛогToolStripMenuItem.Name = "ПоказатьЛогToolStripMenuItem"
-        Me.ПоказатьЛогToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ПоказатьЛогToolStripMenuItem.Text = "Показать лог"
         '
         'Form1
         '
