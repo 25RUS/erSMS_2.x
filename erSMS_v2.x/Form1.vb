@@ -60,8 +60,9 @@ Public Class Form1
                 adapter0.Fill(number)
                 For i = 0 To number.Rows.Count - 1
                     Dim gate As DataTable = New DataTable()
-                    Dim adapter1 As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM modems WHERE name = " & number.Rows(i).Item(1), m_dbConn)
+                    Dim adapter1 As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM modems WHERE name = '" & number.Rows(i).Item(1) & "'", m_dbConn)
                     adapter1.Fill(gate)
+                    'LogMrg("debug: " & number.Rows(i).Item(0) & " " & number.Rows(i).Item(1) & " " & gate.Rows(0).Item(0))
                     SMS(number.Rows(i).Item(0), gate.Rows(0).Item(0), message)
                 Next
             Catch ex As Exception
@@ -512,9 +513,10 @@ Public Class Form1
 
     'отправка АТ-команды
     Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
+        Dim at As String = ComboBox2.SelectedItem
         Try
             Dim send As DataTable = New DataTable()
-            Dim adapter As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM modems WHERE name = '" & ComboBox2.SelectedItem & "'", m_dbConn)
+            Dim adapter As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM modems WHERE name = '" & at & "'", m_dbConn)
             adapter.Fill(send)
             OpenPort(send.Rows(0).Item(0))
             SP.WriteLine(TextBox4.Text & vbCrLf)

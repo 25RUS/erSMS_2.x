@@ -106,25 +106,25 @@ Partial Class Form1
         '
         Me.ФайлToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПоказатьЛогToolStripMenuItem, Me.ВыходToolStripMenuItem})
         Me.ФайлToolStripMenuItem.Name = "ФайлToolStripMenuItem"
-        Me.ФайлToolStripMenuItem.Size = New System.Drawing.Size(45, 20)
+        Me.ФайлToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ФайлToolStripMenuItem.Text = "Файл"
         '
         'ПоказатьЛогToolStripMenuItem
         '
         Me.ПоказатьЛогToolStripMenuItem.Name = "ПоказатьЛогToolStripMenuItem"
-        Me.ПоказатьЛогToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.ПоказатьЛогToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ПоказатьЛогToolStripMenuItem.Text = "Показать лог"
         '
         'ВыходToolStripMenuItem
         '
         Me.ВыходToolStripMenuItem.Name = "ВыходToolStripMenuItem"
-        Me.ВыходToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
+        Me.ВыходToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.ВыходToolStripMenuItem.Text = "Выход"
         '
         'СправкаToolStripMenuItem
         '
         Me.СправкаToolStripMenuItem.Name = "СправкаToolStripMenuItem"
-        Me.СправкаToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
+        Me.СправкаToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
         Me.СправкаToolStripMenuItem.Text = "Справка"
         '
         'TabControl1
@@ -570,7 +570,7 @@ Partial Class Form1
         Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximizeBox = False
         Me.Name = "Form1"
-        Me.Text = "erSMS v2.0"
+        Me.Text = "erSMS_v2.0(alpha)"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
