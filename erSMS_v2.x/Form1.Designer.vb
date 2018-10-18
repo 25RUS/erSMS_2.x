@@ -26,6 +26,7 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ФайлToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПоказатьЛогToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ВыходToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.СправкаToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
@@ -74,7 +75,7 @@ Partial Class Form1
         Me.Button10 = New System.Windows.Forms.Button()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.ПоказатьЛогToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ОПрограммеToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -106,8 +107,14 @@ Partial Class Form1
         '
         Me.ФайлToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПоказатьЛогToolStripMenuItem, Me.ВыходToolStripMenuItem})
         Me.ФайлToolStripMenuItem.Name = "ФайлToolStripMenuItem"
-        Me.ФайлToolStripMenuItem.Size = New System.Drawing.Size(45, 20)
+        Me.ФайлToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ФайлToolStripMenuItem.Text = "Файл"
+        '
+        'ПоказатьЛогToolStripMenuItem
+        '
+        Me.ПоказатьЛогToolStripMenuItem.Name = "ПоказатьЛогToolStripMenuItem"
+        Me.ПоказатьЛогToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ПоказатьЛогToolStripMenuItem.Text = "Показать лог"
         '
         'ВыходToolStripMenuItem
         '
@@ -117,8 +124,9 @@ Partial Class Form1
         '
         'СправкаToolStripMenuItem
         '
+        Me.СправкаToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ОПрограммеToolStripMenuItem})
         Me.СправкаToolStripMenuItem.Name = "СправкаToolStripMenuItem"
-        Me.СправкаToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
+        Me.СправкаToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
         Me.СправкаToolStripMenuItem.Text = "Справка"
         '
         'TabControl1
@@ -552,11 +560,11 @@ Partial Class Form1
         'Timer1
         '
         '
-        'ПоказатьЛогToolStripMenuItem
+        'ОПрограммеToolStripMenuItem
         '
-        Me.ПоказатьЛогToolStripMenuItem.Name = "ПоказатьЛогToolStripMenuItem"
-        Me.ПоказатьЛогToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ПоказатьЛогToolStripMenuItem.Text = "Показать лог"
+        Me.ОПрограммеToolStripMenuItem.Name = "ОПрограммеToolStripMenuItem"
+        Me.ОПрограммеToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ОПрограммеToolStripMenuItem.Text = "О программе"
         '
         'Form1
         '
@@ -647,5 +655,6 @@ Partial Class Form1
     Friend WithEvents Button10 As System.Windows.Forms.Button
     Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
     Friend WithEvents ПоказатьЛогToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ОПрограммеToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

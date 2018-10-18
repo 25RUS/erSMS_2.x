@@ -14,7 +14,7 @@ Public Class Form1
 
 #Region "DB presets"
     Dim connectionString As String = "Data Source={0};Version=3;"
-    Dim DB As String = IO.Directory.GetCurrentDirectory & "\Plugins\erSMS_Resources\settings.db"
+    Dim DB As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\settings.db"
     'Dim SQL As String
     Dim m_dbConn As SQLiteConnection
     Dim m_sqlCmd As SQLiteCommand
@@ -210,16 +210,9 @@ Public Class Form1
     End Sub
 
     Private Sub LogMrg(ByVal log As String)
-        'удаление пустых строк из лога
-        'Try
-        '    Dim textS As String = IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt")
-        '    Dim textE = textS.Replace(New Char() {vbLf, vbCr}, "").TrimEnd(New Char() {vbLf, vbCr})
-        '    My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", textE & vbNewLine, False)
-        'Catch ex As Exception
-        'End Try
         Try
             Dim D As Date = Now
-            My.Computer.FileSystem.WriteAllText(IO.Directory.GetCurrentDirectory & "\Plugins\erSMS_Resources\ersms.log", D & ": " & log & vbNewLine, True)
+            My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\ersms.log", D & ": " & log.Replace(New Char() {vbLf, vbCr}, "").TrimEnd(New Char() {vbLf, vbCr}) & vbNewLine, True)
         Catch ex As Exception
         End Try
     End Sub
@@ -518,9 +511,19 @@ Public Class Form1
     'показать лог
     Private Sub ПоказатьЛогToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ПоказатьЛогToolStripMenuItem.Click
         Try
-            Process.Start(IO.Directory.GetCurrentDirectory & "\Plugins\erSMS_Resources\ersms.log")
+            Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\ersms.log")
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+    End Sub
+
+    'выход
+    Private Sub ВыходToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ВыходToolStripMenuItem.Click
+        End
+    End Sub
+
+    'о программе
+    Private Sub ОПрограммеToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ОПрограммеToolStripMenuItem.Click
+
     End Sub
 End Class
