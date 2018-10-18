@@ -26,7 +26,6 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ФайлToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ПоказатьЛогToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ВыходToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.СправкаToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
@@ -36,6 +35,11 @@ Partial Class Form1
         Me.Button5 = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
@@ -70,14 +74,7 @@ Partial Class Form1
         Me.Button10 = New System.Windows.Forms.Button()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewImageColumn()
-        Me.Button11 = New System.Windows.Forms.Button()
-        Me.ОПрограммеToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ЛицензияToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ПоказатьЛогToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -112,12 +109,6 @@ Partial Class Form1
         Me.ФайлToolStripMenuItem.Size = New System.Drawing.Size(45, 20)
         Me.ФайлToolStripMenuItem.Text = "Файл"
         '
-        'ПоказатьЛогToolStripMenuItem
-        '
-        Me.ПоказатьЛогToolStripMenuItem.Name = "ПоказатьЛогToolStripMenuItem"
-        Me.ПоказатьЛогToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ПоказатьЛогToolStripMenuItem.Text = "Показать лог"
-        '
         'ВыходToolStripMenuItem
         '
         Me.ВыходToolStripMenuItem.Name = "ВыходToolStripMenuItem"
@@ -126,7 +117,6 @@ Partial Class Form1
         '
         'СправкаToolStripMenuItem
         '
-        Me.СправкаToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ЛицензияToolStripMenuItem, Me.ОПрограммеToolStripMenuItem})
         Me.СправкаToolStripMenuItem.Name = "СправкаToolStripMenuItem"
         Me.СправкаToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
         Me.СправкаToolStripMenuItem.Text = "Справка"
@@ -212,6 +202,38 @@ Partial Class Form1
         Me.DataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView2.Size = New System.Drawing.Size(475, 315)
         Me.DataGridView2.TabIndex = 0
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "Шлюз"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Порт"
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "Оператор"
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Сигнал dBm"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        '
+        'Column5
+        '
+        Me.Column5.HeaderText = "Уровень"
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'GroupBox3
         '
@@ -493,7 +515,6 @@ Partial Class Form1
         '
         'GroupBox7
         '
-        Me.GroupBox7.Controls.Add(Me.Button11)
         Me.GroupBox7.Controls.Add(Me.ListBox2)
         Me.GroupBox7.Controls.Add(Me.Button10)
         Me.GroupBox7.Controls.Add(Me.TextBox4)
@@ -514,9 +535,9 @@ Partial Class Form1
         '
         'Button10
         '
-        Me.Button10.Location = New System.Drawing.Point(360, 16)
+        Me.Button10.Location = New System.Drawing.Point(384, 19)
         Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(57, 35)
+        Me.Button10.Size = New System.Drawing.Size(103, 31)
         Me.Button10.TabIndex = 1
         Me.Button10.Text = "Ввод"
         Me.Button10.UseVisualStyleBackColor = True
@@ -525,64 +546,17 @@ Partial Class Form1
         '
         Me.TextBox4.Location = New System.Drawing.Point(6, 24)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(348, 20)
+        Me.TextBox4.Size = New System.Drawing.Size(371, 20)
         Me.TextBox4.TabIndex = 0
         '
         'Timer1
         '
         '
-        'Column1
+        'ПоказатьЛогToolStripMenuItem
         '
-        Me.Column1.HeaderText = "Шлюз"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Порт"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        '
-        'Column3
-        '
-        Me.Column3.HeaderText = "Оператор"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Сигнал"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        '
-        'Column5
-        '
-        Me.Column5.HeaderText = "Уровень"
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        '
-        'Button11
-        '
-        Me.Button11.Location = New System.Drawing.Point(424, 16)
-        Me.Button11.Name = "Button11"
-        Me.Button11.Size = New System.Drawing.Size(63, 35)
-        Me.Button11.TabIndex = 3
-        Me.Button11.Text = "Очистить"
-        Me.Button11.UseVisualStyleBackColor = True
-        '
-        'ОПрограммеToolStripMenuItem
-        '
-        Me.ОПрограммеToolStripMenuItem.Name = "ОПрограммеToolStripMenuItem"
-        Me.ОПрограммеToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ОПрограммеToolStripMenuItem.Text = "О программе"
-        '
-        'ЛицензияToolStripMenuItem
-        '
-        Me.ЛицензияToolStripMenuItem.Name = "ЛицензияToolStripMenuItem"
-        Me.ЛицензияToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ЛицензияToolStripMenuItem.Text = "Лицензия"
+        Me.ПоказатьЛогToolStripMenuItem.Name = "ПоказатьЛогToolStripMenuItem"
+        Me.ПоказатьЛогToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ПоказатьЛогToolStripMenuItem.Text = "Показать лог"
         '
         'Form1
         '
@@ -596,7 +570,7 @@ Partial Class Form1
         Me.MainMenuStrip = Me.MenuStrip1
         Me.MaximizeBox = False
         Me.Name = "Form1"
-        Me.Text = "erSMS 2.0"
+        Me.Text = "erSMS v2.0"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
@@ -658,6 +632,11 @@ Partial Class Form1
     Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
     Friend WithEvents Button9 As System.Windows.Forms.Button
     Friend WithEvents Button8 As System.Windows.Forms.Button
+    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewImageColumn
     Friend WithEvents Номера As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents gate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
@@ -668,13 +647,5 @@ Partial Class Form1
     Friend WithEvents Button10 As System.Windows.Forms.Button
     Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
     Friend WithEvents ПоказатьЛогToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As System.Windows.Forms.DataGridViewImageColumn
-    Friend WithEvents Button11 As System.Windows.Forms.Button
-    Friend WithEvents ОПрограммеToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ЛицензияToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
