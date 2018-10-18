@@ -15,18 +15,17 @@ Public Class Form1
 #Region "DB presets"
     Dim connectionString As String = "Data Source={0};Version=3;"
     Dim DB As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\settings.db"
-    'Dim SQL As String
     Dim m_dbConn As SQLiteConnection
     Dim m_sqlCmd As SQLiteCommand
 #End Region
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Connect()
+        connectionString = String.Format(connectionString, DB)
         If args(0) = "Setting" Then
             Me.Show()
             AddCOM()
+            Connect()
             'считывание настроек
-            connectionString = String.Format(connectionString, DB)
             If Not My.Computer.FileSystem.FileExists(DB) Then
                 Try
                     'создать БД с настройками по умолчанию
@@ -39,7 +38,7 @@ Public Class Form1
                         DBSend("INSERT INTO killthemall (killme) VALUES ('" & killme(i) & "')")
                     Next
                 Catch ex As Exception
-                    MsgBox("Creating default DB error: " & ex.Message)
+                    LogMrg("Creating default DB error: " & ex.Message)
                 End Try
             ElseIf My.Computer.FileSystem.FileExists(DB) = True Then
                 'просто считать настройки с существующей БД
@@ -58,12 +57,13 @@ Public Class Form1
                 message = message + args(i) & " "
             Next
             Try
+                Connect()
                 Dim number As DataTable = New DataTable()
                 Dim adapter0 As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM phones", m_dbConn)
                 adapter0.Fill(number)
                 For i = 0 To number.Rows.Count - 1
                     Dim gate As DataTable = New DataTable()
-                    Dim adapter1 As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM modems WHERE name = " & number.Rows(i).Item(1), m_dbConn)
+                    Dim adapter1 As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM modems WHERE name = '" & number.Rows(i).Item(1) & "'", m_dbConn)
                     adapter1.Fill(gate)
                     SMS(number.Rows(i).Item(0), gate.Rows(0).Item(0), message)
                 Next
@@ -205,7 +205,7 @@ Public Class Form1
             SP.RtsEnable = True
             SP.Open()
         Catch ex As Exception
-            MsgBox("OpenPort error: " & ex.Message)
+            LogMrg("OpenPort error: " & ex.Message)
         End Try
     End Sub
 
@@ -236,6 +236,7 @@ Public Class Form1
 
     'прикончить всех
     Private Sub BornToKill()
+        Connect()
         Try
             Dim kill0 As DataTable = New DataTable
             Dim adapter0 As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM killthemall", m_dbConn)
@@ -245,12 +246,13 @@ Public Class Form1
                 Process.GetProcessesByName(kill0.Rows(m).Item(0).ToString())(0).Kill()
             Next
         Catch ex As Exception
-            'MsgBox("BornToKill error: " & ex.Message)
+            'LogMrg("BornToKill error: " & ex.Message)
         End Try
     End Sub
 
     'обновление списка смертников
     Private Sub KillListboxUpdate()
+        Connect()
         Try
             ListBox1.Items.Clear()
             Dim kill As DataTable = New DataTable()
@@ -260,7 +262,7 @@ Public Class Form1
                 ListBox1.Items.Add(kill.Rows(k).Item(0).ToString)
             Next
         Catch ex As Exception
-            MsgBox("KillListboxUpdate error: " & ex.Message)
+            LogMrg("KillListboxUpdate error: " & ex.Message)
         End Try
     End Sub
     '*********************************************************GUI************************************************
@@ -298,7 +300,7 @@ Public Class Form1
                 MsgBox("Не должно быть пустых полей!")
             End If
         Catch ex As Exception
-            MsgBox(ex.Message)
+            LogMrg("ModemAdd: " & ex.Message)
         End Try
         ModemRead()
     End Sub
@@ -319,6 +321,7 @@ Public Class Form1
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         Timer1.Interval = 10000
         AddCOM()
+        BornToKill()
         Dim OpSos As String = ""
         Dim SignalInfo As String = ""
         Dim name As String = ""
@@ -337,13 +340,13 @@ Public Class Form1
                 name = modem.Rows(i).Item(1)
                 com = modem.Rows(i).Item(0)
                 Dim sigarr() As String = SignalInfo.Split(" ")
-                DataGridView2.Rows.Add(name, com, OpSos, sigarr(0))
+                DataGridView2.Rows.Add(name, com, OpSos, sigarr(0) & " dBm")
                 DataGridView2.Rows(i).Cells(4).Value = New Bitmap(IO.Directory.GetCurrentDirectory & "\Plugins\erSMS_Resources\Signal\" & sigarr(1))
                 ComboBox2.Items.Add(name)
                 ComboBox3.Items.Add(name)
             Next
         Catch ex As Exception
-            MsgBox("GateListUpdate error: " & ex.Message)
+            LogMrg("GateListUpdate error: " & ex.Message)
         End Try
     End Sub
 
@@ -492,6 +495,7 @@ Public Class Form1
 
     'отправка АТ-команды
     Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
+        Connect()
         Try
             Dim send As DataTable = New DataTable()
             Dim adapter As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM modems WHERE name = '" & ComboBox2.SelectedItem & "'", m_dbConn)
@@ -504,7 +508,7 @@ Public Class Form1
             ListBox2.Items.Add(send.Rows(0).Item(0) & "> " & TextBox4.Text)
             ListBox2.Items.AddRange(answer.Split(vbNewLine))
         Catch ex As Exception
-            MsgBox(ex.Message)
+            LogMrg("Terminal: " & ex.Message)
         End Try
     End Sub
 
