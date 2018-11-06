@@ -280,18 +280,18 @@ Public Class Form1
             MsgBox("Введите номер телефона!")
         Else
             DataGridView1.Rows.Clear()
-            DBSend("INSERT INTO phones (number, gate) VALUES ('" & TextBox1.Text & "', '" & ComboBox3.SelectedItem & "')")
+            DBSend("INSERT INTO phones (number, gate) VALUES ('" & TextBox1.Text & "', '" & gate & "')")
             DBPhoneRead()
         End If
     End Sub
 
     'добавление модемов
     Private Sub Button4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button4.Click
-        Dim port As String = ComboBox1.SelectedItem
+        Dim port As String = ComboBox1.Text
         Dim name As String = TextBox2.Text
         Try
             If name <> "" And port <> "" Then
-                DBSend("INSERT INTO modems (com,  name) VALUES ('" & ComboBox1.SelectedItem & "', '" & TextBox2.Text & "')")
+                DBSend("INSERT INTO modems (com,  name) VALUES ('" & port & "', '" & name & "')")
                 ModemRead()
                 TextBox2.Text = ""
             Else
@@ -517,15 +517,6 @@ Public Class Form1
     'выход
     Private Sub ВыходToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ВыходToolStripMenuItem.Click
         End
-    End Sub
-
-    'о программе
-    Private Sub ОПрограммеToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ОПрограммеToolStripMenuItem.Click
-        Try
-            Process.Start(IO.Directory.GetCurrentDirectory & "\Plugins\erSMS_Resources\about.txt")
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
     End Sub
 
     'об АТ
