@@ -1,0 +1,12 @@
+C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\bin\Release\erSMS.exe
+C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\bin\Release\erSMS.pdb
+C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\bin\Release\erSMS.xml
+C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\bin\Release\System.Data.SQLite.dll
+C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\obj\x86\Release\erSMS.Form1.resources
+C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\obj\x86\Release\erSMS.Resources.resources
+C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\obj\x86\Release\erSMS.exe
+C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\obj\x86\Release\erSMS.xml
+C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\obj\x86\Release\erSMS.pdb

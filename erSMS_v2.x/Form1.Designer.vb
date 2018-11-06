@@ -37,6 +37,11 @@ Partial Class Form1
         Me.Button5 = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewImageColumn()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
@@ -71,11 +76,7 @@ Partial Class Form1
         Me.Button10 = New System.Windows.Forms.Button()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.СпавочникАТкомандToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -107,32 +108,32 @@ Partial Class Form1
         '
         Me.ФайлToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ПоказатьЛогToolStripMenuItem, Me.ВыходToolStripMenuItem})
         Me.ФайлToolStripMenuItem.Name = "ФайлToolStripMenuItem"
-        Me.ФайлToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
+        Me.ФайлToolStripMenuItem.Size = New System.Drawing.Size(45, 20)
         Me.ФайлToolStripMenuItem.Text = "Файл"
         '
         'ПоказатьЛогToolStripMenuItem
         '
         Me.ПоказатьЛогToolStripMenuItem.Name = "ПоказатьЛогToolStripMenuItem"
-        Me.ПоказатьЛогToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.ПоказатьЛогToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ПоказатьЛогToolStripMenuItem.Text = "Показать лог"
         '
         'ВыходToolStripMenuItem
         '
         Me.ВыходToolStripMenuItem.Name = "ВыходToolStripMenuItem"
-        Me.ВыходToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.ВыходToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ВыходToolStripMenuItem.Text = "Выход"
         '
         'СправкаToolStripMenuItem
         '
-        Me.СправкаToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ОПрограммеToolStripMenuItem})
+        Me.СправкаToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.СпавочникАТкомандToolStripMenuItem, Me.ОПрограммеToolStripMenuItem})
         Me.СправкаToolStripMenuItem.Name = "СправкаToolStripMenuItem"
-        Me.СправкаToolStripMenuItem.Size = New System.Drawing.Size(65, 20)
+        Me.СправкаToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
         Me.СправкаToolStripMenuItem.Text = "Справка"
         '
         'ОПрограммеToolStripMenuItem
         '
         Me.ОПрограммеToolStripMenuItem.Name = "ОПрограммеToolStripMenuItem"
-        Me.ОПрограммеToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.ОПрограммеToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
         Me.ОПрограммеToolStripMenuItem.Text = "О программе"
         '
         'TabControl1
@@ -216,6 +217,38 @@ Partial Class Form1
         Me.DataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView2.Size = New System.Drawing.Size(475, 315)
         Me.DataGridView2.TabIndex = 0
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "Шлюз"
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Порт"
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "Оператор"
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Сигнал"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        '
+        'Column5
+        '
+        Me.Column5.HeaderText = "Уровень"
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'GroupBox3
         '
@@ -395,7 +428,7 @@ Partial Class Form1
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage3.Size = New System.Drawing.Size(501, 520)
         Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Убивашка"
+        Me.TabPage3.Text = "Автозавершение процессов"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
         'GroupBox6
@@ -534,37 +567,11 @@ Partial Class Form1
         'Timer1
         '
         '
-        'Column1
+        'СпавочникАТкомандToolStripMenuItem
         '
-        Me.Column1.HeaderText = "Шлюз"
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Порт"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        '
-        'Column3
-        '
-        Me.Column3.HeaderText = "Оператор"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Сигнал"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        '
-        'Column5
-        '
-        Me.Column5.HeaderText = "Уровень"
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        Me.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.СпавочникАТкомандToolStripMenuItem.Name = "СпавочникАТкомандToolStripMenuItem"
+        Me.СпавочникАТкомандToolStripMenuItem.Size = New System.Drawing.Size(186, 22)
+        Me.СпавочникАТкомандToolStripMenuItem.Text = "Спавочник АТ-команд"
         '
         'Form1
         '
@@ -656,5 +663,6 @@ Partial Class Form1
     Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column5 As System.Windows.Forms.DataGridViewImageColumn
+    Friend WithEvents СпавочникАТкомандToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

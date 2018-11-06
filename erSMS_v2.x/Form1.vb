@@ -228,8 +228,6 @@ Public Class Form1
                 ComboBox1.Items.Add(port)
             Next port
         Catch ex As Exception
-            ' Dim D As Date = Now
-            ' My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", D & ": PortsAdd_ERROR: " & ex.Message & vbNewLine, True)
         End Try
         'ComboBox1.Items.Add("COM2") 'debug
     End Sub
@@ -350,7 +348,6 @@ Public Class Form1
         End Try
     End Sub
 
-
     'получить имя сети
     Private Function GetOperator()
         Dim oper As String
@@ -361,8 +358,6 @@ Public Class Form1
             Threading.Thread.Sleep(500)
             oper = SP.ReadExisting()
             oper = oper.Replace(New Char() {vbLf, vbCr}, "").TrimEnd(New Char() {vbLf, vbCr})
-            'Dim D As Date = Now
-            'My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", D & " GetOperator: " & oper & vbNewLine, True)
             Dim separator As String = "," 'Chr(132)
             Dim oper0() As String = oper.Split(separator.ToCharArray)
             Dim oper1 As String = oper0(2).Replace("""", "")
@@ -400,8 +395,6 @@ Public Class Form1
             Threading.Thread.Sleep(500)
             ModemAnswer = SP.ReadExisting()
         Catch ex As Exception
-            'Dim D As Date = Now
-            'My.Computer.FileSystem.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) & "\CLM\Plugins\erSMS_Resources\erSMS_log.txt", D & ": Signal_ERROR: " & ex.Message & vbNewLine, True)
         End Try
 
 
@@ -528,6 +521,19 @@ Public Class Form1
 
     'о программе
     Private Sub ОПрограммеToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ОПрограммеToolStripMenuItem.Click
+        Try
+            Process.Start(IO.Directory.GetCurrentDirectory & "\Plugins\erSMS_Resources\about.txt")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
 
+    'об АТ
+    Private Sub СпавочникАТкомандToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles СпавочникАТкомандToolStripMenuItem.Click
+        Try
+            Process.Start(IO.Directory.GetCurrentDirectory & "\Plugins\erSMS_Resources\at.txt")
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 End Class

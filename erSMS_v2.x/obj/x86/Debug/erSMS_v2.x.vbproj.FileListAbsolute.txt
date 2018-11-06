@@ -74,3 +74,6 @@ D:\GITHUB\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\erSMS_v2.x.vbproj.GenerateResource.
 D:\GITHUB\erSMS_2.x\erSMS_v2.x\bin\Debug\erSMS.exe
 D:\GITHUB\erSMS_2.x\erSMS_v2.x\bin\Debug\erSMS.pdb
 D:\GITHUB\erSMS_2.x\erSMS_v2.x\bin\Debug\erSMS.xml
+C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\erSMS.exe
+C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\erSMS.xml
+C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\obj\x86\Debug\erSMS.pdb
