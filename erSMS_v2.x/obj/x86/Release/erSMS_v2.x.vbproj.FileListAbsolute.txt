@@ -10,3 +10,13 @@ C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\obj\x86\Release\GenerateRe
 C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\obj\x86\Release\erSMS.exe
 C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\obj\x86\Release\erSMS.xml
 C:\Users\TOLERAST\Desktop\shared\erSMS_2.x\erSMS_v2.x\obj\x86\Release\erSMS.pdb
+D:\GITHUB\erSMS_2.x\erSMS_v2.x\obj\x86\Release\erSMS.exe
+D:\GITHUB\erSMS_2.x\erSMS_v2.x\obj\x86\Release\erSMS.xml
+D:\GITHUB\erSMS_2.x\erSMS_v2.x\obj\x86\Release\erSMS.pdb
+D:\GITHUB\erSMS_2.x\erSMS_v2.x\bin\Release\erSMS.exe
+D:\GITHUB\erSMS_2.x\erSMS_v2.x\bin\Release\erSMS.pdb
+D:\GITHUB\erSMS_2.x\erSMS_v2.x\bin\Release\erSMS.xml
+D:\GITHUB\erSMS_2.x\erSMS_v2.x\obj\x86\Release\erSMS_v2.x.vbprojResolveAssemblyReference.cache
+D:\GITHUB\erSMS_2.x\erSMS_v2.x\obj\x86\Release\erSMS.Form1.resources
+D:\GITHUB\erSMS_2.x\erSMS_v2.x\obj\x86\Release\erSMS.Resources.resources
+D:\GITHUB\erSMS_2.x\erSMS_v2.x\obj\x86\Release\erSMS_v2.x.vbproj.GenerateResource.Cache

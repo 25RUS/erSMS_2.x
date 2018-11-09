@@ -24,7 +24,6 @@ Public Class Form1
         If args(0) = "Setting" Then
             Me.Show()
             AddCOM()
-            Connect()
             'считывание настроек
             If Not My.Computer.FileSystem.FileExists(DB) Then
                 Try
@@ -37,6 +36,7 @@ Public Class Form1
                     For i = 0 To killme.Count - 1
                         DBSend("INSERT INTO killthemall (killme) VALUES ('" & killme(i) & "')")
                     Next
+                    LogMrg("Default DB created successfull!")
                 Catch ex As Exception
                     LogMrg("Creating default DB error: " & ex.Message)
                 End Try
@@ -86,7 +86,7 @@ Public Class Form1
             m_dbConn = New SQLiteConnection(connectionString)
             m_dbConn.Open()
         Catch ex As Exception
-            MessageBox.Show("Error: " + ex.Message)
+            LogMrg("Connect() Error: " + ex.Message)
         End Try
     End Sub
 
@@ -98,7 +98,7 @@ Public Class Form1
             m_sqlCmd.CommandText = sqlQuery
             m_sqlCmd.ExecuteNonQuery()
         Catch ex As Exception
-            MessageBox.Show("BDSend Error: " + ex.Message)
+            LogMrg("BDSend() Error: " + ex.Message)
         End Try
     End Sub
 
@@ -116,7 +116,7 @@ Public Class Form1
                 Next
             End If
         Catch ex As Exception
-            MessageBox.Show("DBPhoneRead Error: " + ex.Message)
+            LogMrg("DBPhoneRead() Error: " + ex.Message)
         End Try
     End Sub
 
@@ -128,7 +128,7 @@ Public Class Form1
             Dim adapter As SQLiteDataAdapter = New SQLiteDataAdapter("SELECT * FROM modems", m_dbConn)
             adapter.Fill(modem)
         Catch ex As Exception
-            MsgBox("ModemRead error: " & ex.Message)
+            LogMrg("ModemRead() error: " & ex.Message)
         End Try
     End Sub
 
@@ -187,7 +187,7 @@ Public Class Form1
             'логгирование
             LogMrg(sp_result)
         Catch ex As Exception
-            LogMrg("SMS error: " & ex.Message)
+            LogMrg("SMS() error: " & ex.Message)
         End Try
     End Sub
 
@@ -205,7 +205,7 @@ Public Class Form1
             SP.RtsEnable = True
             SP.Open()
         Catch ex As Exception
-            LogMrg("OpenPort error: " & ex.Message)
+            LogMrg("OpenPort() error: " & ex.Message)
         End Try
     End Sub
 
@@ -260,7 +260,7 @@ Public Class Form1
                 ListBox1.Items.Add(kill.Rows(k).Item(0).ToString)
             Next
         Catch ex As Exception
-            LogMrg("KillListboxUpdate error: " & ex.Message)
+            LogMrg("KillListboxUpdate() error: " & ex.Message)
         End Try
     End Sub
     '*********************************************************GUI************************************************
@@ -298,7 +298,7 @@ Public Class Form1
                 MsgBox("Не должно быть пустых полей!")
             End If
         Catch ex As Exception
-            LogMrg("ModemAdd: " & ex.Message)
+            LogMrg("ModemAdd() error: " & ex.Message)
         End Try
         ModemRead()
     End Sub
@@ -344,7 +344,7 @@ Public Class Form1
                 ComboBox3.Items.Add(name)
             Next
         Catch ex As Exception
-            LogMrg("GateListUpdate error: " & ex.Message)
+            LogMrg("GateListUpdate() error: " & ex.Message)
         End Try
     End Sub
 
